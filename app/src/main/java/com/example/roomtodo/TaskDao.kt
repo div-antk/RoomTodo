@@ -5,20 +5,23 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
+import java.util.concurrent.Flow
 
 class TaskDao {
     @Dao
     interface TaskDao {
         @Insert
-        fun insertTask(task: Task)
+        // suspendを付けることで非同期ワンショットクエリにする
+        suspend fun insertTask(task: Task)
 
         @Query("SELECT * FROM Task")
-        fun loadAllTasks(): List<Task>
+        // Flow(coroutine)にすることでオブザーバブルクエリにする
+        fun loadAllTasks(): Flow<List<Task>>
 
         @Update
-        fun updateTask(task: Task)
+        suspend fun updateTask(task: Task)
 
         @Delete
-        fun deleteTask(task: Task)
+        suspend fun deleteTask(task: Task)
     }
 }
