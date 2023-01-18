@@ -1,10 +1,10 @@
 package com.example.roomtodo.components
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.AlertDialog
+import androidx.compose.material.Button
 import androidx.compose.material.TextField
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
@@ -24,9 +24,23 @@ class EditDialog {
                     TextField(value = "", onValueChange = { /* TODO */ })
                 }
             },
-
-            ) {
-
+            buttons = {
+                Row(
+                    modifier = Modifier.padding(all = 8.dp),
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Spacer(modifier = Modifier.weight(1f))
+                    Button(
+                        modifier = Modifier.weight(120.dp),
+                        onClick = {
+                            isShowDialog.value = false
+                        },
+                    ) {
+                        Text(text = "OK")
+                    }
+                }
+            }
+            )
         }
     }
 }
